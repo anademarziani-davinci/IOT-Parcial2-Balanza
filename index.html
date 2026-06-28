@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Balanza — Panel de Control</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">BALANZA<span>.ctrl</span></div>
+    <div id="conn-status">
+      <div id="conn-dot"></div>
+      <span id="conn-text">Desconectado</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Display principal -->
+    <div class="card-panel display-card">
+      <div class="label">Lectura actual — Peso restante</div>
+      <div id="peso-display">0.00<span id="peso-unit">g</span></div>
+      <div class="display-sub" id="estado-text">Sin carga</div>
+    </div>
+
+    <!-- Barra de capacidad -->
+    <div class="card-panel weight-bar-wrapper">
+      <div class="label">Capacidad restante</div>
+      <div class="weight-bar-track">
+        <div class="weight-bar-fill" id="weight-bar"></div>
+      </div>
+      <div class="bar-labels">
+        <span>0 g</span>
+        <span id="max-label">— g</span>
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <div class="card-panel">
+      <div class="label">Controles</div>
+      <div class="control-group">
+        <div class="input-group-custom">
+          <label for="descarga-input">Peso por descarga (g)</label>
+          <input type="number" id="descarga-input" placeholder="Ej: 500" min="0" step="0.01" />
+        </div>
+        <button class="btn-action btn-load" id="btn-cargar" onclick="configurarDescarga()">
+          ⚙ Configurar descarga
+        </button>
+        <button class="btn-action btn-unload" id="btn-descargar" onclick="descargarPeso()" disabled>
+          ▲ Descargar
+        </button>
+        <div class="btn-row">
+          <button class="btn-action btn-reset" onclick="resetBalanza()">
+            ↺ Reset
+          </button>
+          <button class="btn-action btn-connect" id="btn-connect" onclick="toggleConexion()">
+            ⚡ Conectar Wokwi
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="card-panel">
+      <div class="label">Información</div>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">Capacidad total</div>
+          <div class="info-value" id="info-capacidad">— g</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Peso restante</div>
+          <div class="info-value" id="info-restante">— g</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Peso por descarga</div>
+          <div class="info-value" id="info-descarga">— g</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Descargas restantes</div>
+          <div class="info-value" id="info-descargas-rest">—</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Descargas hechas</div>
+          <div class="info-value" id="info-ops">0</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Estado</div>
+          <div class="info-value" id="info-estado">Inactiva</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Log -->
+    <div class="card-panel log-card">
+      <div class="label">Registro de actividad</div>
+      <div id="log-list"></div>
+    </div>
+  </main>
+
+  <footer>BALANZA.ctrl — Simulador de balanza · Wokwi ready</footer>
+
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

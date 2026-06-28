@@ -1,0 +1,54 @@
+﻿{
+  "version": 1,
+  "author": "Ana María Demarziani",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": -4.76, "attrs": {} },
+    {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": -92.86,
+      "left": 173.03,
+      "attrs": { "i2cAddress": "0x3c" }
+    },
+    { "type": "wokwi-hx711", "id": "hx1", "top": 89, "left": 309.8, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": -70.6,
+      "left": 355.2,
+      "attrs": { "color": "blue", "xray": "1", "label": "Reiniciar tara" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn2",
+      "top": 6.2,
+      "left": 355.2,
+      "attrs": { "color": "green", "xray": "1", "label": "WIFI" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn3",
+      "top": -157,
+      "left": 355.2,
+      "attrs": { "color": "blue", "xray": "1", "label": "Descargar 5g" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:GND.1", "oled1:GND", "black", [ "h-38.25", "v-240" ] ],
+    [ "esp:3V3", "oled1:VCC", "red", [ "h-28.65", "v-124.8", "h182.4", "h67.05" ] ],
+    [ "esp:21", "oled1:SDA", "green", [ "h19.2", "v-192", "h124.73" ] ],
+    [ "esp:22", "oled1:SCL", "green", [ "h9.6", "v-153.6", "h124.5" ] ],
+    [ "esp:3V3", "hx1:VCC", "red", [ "h-28.65", "v230.4", "h220.8", "v-153.6" ] ],
+    [ "esp:GND.3", "hx1:GND", "black", [ "h57.6", "v28.8", "h153.6", "v0.3" ] ],
+    [ "esp:16", "hx1:SCK", "green", [ "h28.8", "h182.4", "v0.8" ] ],
+    [ "esp:17", "hx1:DT", "green", [ "h28.8", "h182.4", "v0.5" ] ],
+    [ "esp:GND.3", "btn1:1.l", "black", [ "h57.6", "v28.8", "h153.6", "v-172.8" ] ],
+    [ "btn1:2.r", "esp:19", "blue", [ "h9.8", "v105.8", "h-307.2", "v28.8" ] ],
+    [ "esp:GND.3", "btn2:1.l", "black", [ "h57.6", "v28.8", "h153.6", "v-96" ] ],
+    [ "esp:4", "btn2:2.r", "violet", [ "h38.4", "v-67.2", "h287.8" ] ]
+  ],
+  "dependencies": {}
+}
