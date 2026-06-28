@@ -216,8 +216,8 @@ function conectar() {
       state.conectado = true;
 
       $connDot.classList.add('connected');
-      $connText.textContent = 'Conectado a MQTT';
-      $btnConn.textContent = '⚡ Desconectar MQTT';
+      $connText.textContent = 'Conectado';
+      $btnConn.textContent = 'Desconectar';
       $btnConn.classList.add('active');
 
       state.mqttClient.subscribe(MQTT_TOPIC_STATUS, (error) => {
